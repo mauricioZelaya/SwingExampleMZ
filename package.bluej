@@ -2,7 +2,7 @@
 dependency1.from=DrawingWindow
 dependency1.to=DrawingPanel
 dependency1.type=UsesDependency
-editor.fx.0.height=739
+editor.fx.0.height=735
 editor.fx.0.width=816
 editor.fx.0.x=104
 editor.fx.0.y=0
