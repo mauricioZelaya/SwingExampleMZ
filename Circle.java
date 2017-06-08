@@ -20,11 +20,16 @@ public class Circle
         this.radius = radius;
         this.color = color;
     }
+    
     public Circle(int x, int y){
         this.x = x;
         this.y = y;
         color = getNextColor();
         radius = 25;
+    }
+    
+    public int getRadius(){
+        return radius;
     }
     
     public void draw(Graphics g, int x, int y){
