@@ -3,7 +3,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Random;
+import java.util.Collection;
+import java.util.Vector;
 
 /**
  * Write a description of class DrawingPanel here.
@@ -13,34 +14,57 @@ import java.util.Random;
  */
 public class DrawingPanel extends JPanel
 {
-    private Circle circle;
+    //private Circle circle;
+    private Collection<Circle> circles;
 
     public DrawingPanel(){
         setBackground(Color.GRAY);
-        color = new Color(245, 253, 1);
-        radius = 25;
-        changeColor = false;
-        circle = new Circle(radius, color);
+        
+        //circle = new Circle(25, Color.yellow);
+        circles = new Vector<Circle>();
         
         addMouseListener(new MouseAdapter(){
             
             @Override
             public void mouseClicked(MouseEvent event){
-                System.out.println(String.format("click at: %s, %s", event.getX(), event.getY()));                
-                circle.clickAt(event.getX(), event.getY());
+                //System.out.println(String.format("click at: %s, %s", event.getX(), event.getY()));                
+                
+                //circle.clickAt(event.getX(), event.getY());
+                if(!clickIsInsideAnyCircle(event)){
+                    addNewCircle(event);                        
+                }
+                
                 repaint();
             }
         });
     }
+    private boolean clickIsInsideAnyCircle (MouseEvent event){
+        boolean isInsideCircle = false;
+        for(Circle circle: circles){
+            circle.clickAt(event.getX(), event.getY());
+            if(circle.isInsideCircle(event.getX(), event.getY())){
+                isInsideCircle = true;
+            }
+        }
+        return isInsideCircle;
+    }    
+    
+    private void addNewCircle(MouseEvent event){
+        circles.add(new Circle(event.getX(), event.getY()));
+    }
     
     @Override
     public void paint(Graphics g){
-        super.paint(g);
-        xCenter = getWidth()/2;
-        yCenter = getHeight()/2;
-                
+        super.paint(g);                
         //g.setColor(color);
-        circle.draw(g, xCenter, yCenter);
+        for (Circle circle: circles){
+            circle.draw(g);
+        }
+        
+        //int xCenter = getWidth()/2;
+        //int yCenter = getHeight()/2;
+        
+        //circle.draw(g, xCenter, yCenter);
     }
 
 }

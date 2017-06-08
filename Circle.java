@@ -13,13 +13,26 @@ public class Circle
     private int y;
     private int radius;
     private Color color;
+    private boolean changeAspect;
     
     public Circle(int radius, Color color){
         this.radius = radius;
         this.color = color;
     }
+    public Circle(int x, int y){
+        this.x = x;
+        this.y = y;
+        color = getNextColor();
+        radius = 25;
+    }
     
     public void draw(Graphics g, int x, int y){
+        this.draw(g);
+        this.x=x;
+        this.y =y;
+    }
+    
+    public void draw(Graphics g){
         if(changeAspect){
             color = getNextColor();
             changeAspect =false;
@@ -27,12 +40,10 @@ public class Circle
         }
         g.setColor(color);
         g.fillOval(x - radius, y - radius, radius*2, radius*2);
-        this.x=x;
-        this.y =y;
     }
     
-    public void clickAt(){
-        changeAspect = isInsideTheCircle(x, y);
+    public void clickAt(int x, int y){
+        changeAspect = isInsideCircle(x, y);
     }
     
     private Color getNextColor(){
@@ -41,5 +52,12 @@ public class Circle
         int blue = (int)(255 * Math.random());
         
         return new Color(red, green, blue);
+    }
+    
+    public boolean isInsideCircle(int x, int y){
+        int xCenter = this.x;
+        int yCenter = this.y;
+        double d = Math.hypot(yCenter - y, xCenter - x);
+        return (d <= radius);
     }
 }
