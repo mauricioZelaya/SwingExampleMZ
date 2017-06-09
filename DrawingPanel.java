@@ -3,7 +3,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Vector;
 public class DrawingPanel extends JPanel
 {
     //private Circle circle;
-    private Collection<Circle> circles;
+    private List<Circle> circles;
 
     public DrawingPanel(){
         setBackground(Color.GRAY);
@@ -57,7 +58,8 @@ public class DrawingPanel extends JPanel
     public void paint(Graphics g){
         super.paint(g);                
         //g.setColor(color);
-        for (Circle circle: circles){
+        Collections.sort(circles);
+        for (Circle circle: circles){            
             circle.draw(g);
         }
         

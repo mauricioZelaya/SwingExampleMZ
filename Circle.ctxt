@@ -17,4 +17,6 @@ comment7.params=
 comment7.target=java.awt.Color\ getNextColor()
 comment8.params=x\ y
 comment8.target=boolean\ isInsideCircle(int,\ int)
-numComments=9
+comment9.params=compareCircle
+comment9.target=int\ compareTo(Circle)
+numComments=10
