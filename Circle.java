@@ -19,11 +19,16 @@ public class Circle
         this.radius = radius;
         this.color = color;
     }
+    
     public Circle(int x, int y){
         this.x = x;
         this.y = y;
         color = getNextColor();
         radius = 25;
+    }
+    
+    public int getRadius(){
+        return radius;
     }
     
     public void draw(Graphics g, int x, int y){
@@ -32,18 +37,18 @@ public class Circle
         this.y =y;
     }
     
-    public void draw(Graphics g){
-        if(changeAspect){
-            color = getNextColor();
-            changeAspect =false;
-            radius = (int)(200 * Math.random());
-        }
+    public void draw(Graphics g){        
         g.setColor(color);
         g.fillOval(x - radius, y - radius, radius*2, radius*2);
     }
     
     public void clickAt(int x, int y){
         changeAspect = isInsideCircle(x, y);
+        if(changeAspect){
+            color = getNextColor();
+            changeAspect =false;
+            radius = (int)(200 * Math.random());
+        }
     }
     
     private Color getNextColor(){
