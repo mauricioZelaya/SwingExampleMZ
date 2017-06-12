@@ -18,19 +18,35 @@ import java.util.Comparator;
 public class DrawingPanel extends JPanel
 {
     private Collection<Circle> circles;
+    private Collection<Square> squares;
+    private int randomDraw;
 
     public DrawingPanel(){
         setBackground(Color.GRAY);
         circles = new Vector<Circle>();
+        squares = new Vector<Square>();
+        
 
         addMouseListener(new MouseAdapter(){
 
                 @Override
                 public void mouseClicked(MouseEvent event){
-                    if(!clickIsInsideAnyCircle(event)){
-                        addNewCircle(event);                        
+                    //System.out.println(randomDraw);
+                    randomDraw = (int)(Math.random()*2);
+                    if(randomDraw == 1){
+                        if(!clickIsInsideAnyCircle(event)){
+                            addNewCircle(event);                        
+                        //addNewSquare(event);
                     }
+                }
+                else{
+                    if(!clickIsInsideAnySquare(event)){
+                        //addNewCircle(event);                        
+                        addNewSquare(event);
+                    }
+                }
                     Collections.sort((List<Circle>)circles, new circleComparator());
+                    Collections.sort((List<Square>)squares, new squareComparator());
                     repaint();
                 }
                 
@@ -45,15 +61,30 @@ public class DrawingPanel extends JPanel
         boolean isInsideCircle = false;
         for(Circle circle: circles){
             circle.clickAt(event.getX(), event.getY());
-            if(circle.isInsideCircle(event.getX(), event.getY())){
+            if(circle.contains(event.getX(), event.getY())){
                 isInsideCircle = true;
             }
         }
         return isInsideCircle;
     }    
+    
+    private boolean clickIsInsideAnySquare (MouseEvent event){
+        boolean isInsideSquare = false;
+        for(Square square: squares){
+            square.clickAt(event.getX(), event.getY());
+            if(square.contains(event.getX(), event.getY())){
+                isInsideSquare = true;
+            }
+        }
+        return isInsideSquare;
+    }    
 
     private void addNewCircle(MouseEvent event){
         circles.add(new Circle(event.getX(), event.getY()));
+    }
+    
+    private void addNewSquare(MouseEvent event){
+        squares.add(new Square(event.getX(), event.getY()));
     }
 
     @Override
@@ -61,6 +92,11 @@ public class DrawingPanel extends JPanel
         super.paint(g);                
         for (Circle circle: circles){
             circle.draw(g);
+            //square.draw(g);
+        }
+        for (Square square: squares){
+            //circle.draw(g);
+            square.draw(g);
         }
     }
 
@@ -71,6 +107,22 @@ public class DrawingPanel extends JPanel
                 return 0;
             }
             else if (first.getRadius() > second.getRadius()){
+                return -1;
+            }
+            else{
+                return 1;
+            }
+
+        }
+    }
+    
+    private class squareComparator implements Comparator<Square>{
+        @Override
+        public int compare(Square first, Square second){
+            if(first.getSide() == second.getSide()){
+                return 0;
+            }
+            else if (first.getSide() > second.getSide()){
                 return -1;
             }
             else{
