@@ -23,6 +23,7 @@ public class DrawingPanel extends JPanel
     //private Circle circle;
     private Collection<Circle> circles;
     private Collection<Square> squares;
+    private Collection<Circle> sha;
     
     public DrawingPanel() {
         

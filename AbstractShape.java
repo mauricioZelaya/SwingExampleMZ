@@ -1,4 +1,4 @@
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * Abstract class AbstractShape - write a description of the class here
@@ -26,5 +26,11 @@ public abstract class AbstractShape
         changeAspect = false;
     }
     
-
+    protected abstract void draw(Graphics g, int x, int y);
+    
+    protected abstract void draw(Graphics g);
+    
+    protected abstract void clickAt(int x, int y);
+    
+    protected abstract boolean contains(int x, int y);
 }
