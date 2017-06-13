@@ -13,7 +13,6 @@ public abstract class AbstractShape
     protected Color color;
     protected boolean changeAspect;
     
-    
     protected Color getNextColor() {
         int red = (int) (255 * Math.random());
         int green = (int) (255 * Math.random());
@@ -22,4 +21,10 @@ public abstract class AbstractShape
         return new Color(red, green, blue);
     }
     
+    protected void changeAspect(){
+        color = getNextColor();
+        changeAspect = false;
+    }
+    
+
 }

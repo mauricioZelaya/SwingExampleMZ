@@ -11,7 +11,6 @@ public class Circle extends AbstractShape
 {
     private int radius;
     
-    
     public Circle(int radius, Color color) {
         this.radius = radius;
         this.color = color;
@@ -30,8 +29,7 @@ public class Circle extends AbstractShape
         this.y = y;
     }
     
-    public void draw(Graphics g) {
-        
+    public void draw(Graphics g) {        
         g.setColor(color);
         g.fillOval(x - radius , y - radius, radius * 2, radius * 2);
     }
@@ -39,14 +37,10 @@ public class Circle extends AbstractShape
     public void clickAt(int x, int y) {
         changeAspect = contains(x, y);
         if (changeAspect) {
-            color = getNextColor();
-            changeAspect = false;
+            changeAspect();
             radius = (int)(200 * Math.random());
         }
     }
-    
-    
-    
     
     public boolean contains(int x, int y) {
         int xCenter = this.x;

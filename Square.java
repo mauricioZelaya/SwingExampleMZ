@@ -29,7 +29,6 @@ public class Square extends AbstractShape
     }
     
     public void draw(Graphics g) {
-        
         g.setColor(color);
         g.fillRect(x - side, y - side, side * 2, side * 2);
     }
@@ -37,8 +36,7 @@ public class Square extends AbstractShape
     public void clickAt(int x, int y) {
         changeAspect = contains(x, y);
         if (changeAspect) {
-            color = getNextColor();
-            changeAspect = false;
+            changeAspect();
             side = (int)(200 * Math.random());
         }
     }
