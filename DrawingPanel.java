@@ -23,30 +23,23 @@ public class DrawingPanel extends JPanel
     //private Circle circle;
     private Collection<Circle> circles;
     private Collection<Square> squares;
-    private Collection<AbstractShape> shape;
+    private Collection<AbstractShape> shapes;
     
     public DrawingPanel() {
         
         //circle = new Circle(25, Color.yellow);
         circles = new Vector<Circle>();
         squares = new Vector<Square>();
+        shapes = new Vector<AbstractShape>();
         
         setBackground(Color.GRAY);
         
         addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent event) {
-                int random = (int)(Math.random() * 2);
-                //if (!clickIsInsideAnyCircle(event) && !clickIsInsideAnySquare(event)) {
-                    if (random == 1) {
-                        addNewCircle(event);
-                    }
-                    else {
-                        addNewSquare(event);
-                    }
-                //}
-                
-                Collections.sort((List<Circle>)circles, new CircleComparator());
+                addNewShape(event);                
+                //Collections.sort((List<Circle>)circles, new CircleComparator());
+                Collections.sort((List<AbstractShape>)shapes, new ShapeComparator());
                 repaint();
             }
             
@@ -60,47 +53,44 @@ public class DrawingPanel extends JPanel
             }
         });
     }
-    
-    private boolean clickIsInsideAnyCircle(MouseEvent event) {
-        boolean isInsideAnyCircle = false;
-        for (Circle circle: circles) {
-            circle.clickAt(event.getX(), event.getY());
-            if (circle.contains(event.getX(), event.getY())) {
-                isInsideAnyCircle = true;
+       
+    private boolean clickIsInsideAnyShape(MouseEvent event) {
+        boolean isInsideAnyShape = false;
+        for (AbstractShape shape: shapes) {
+            shape.clickAt(event.getX(), event.getY());
+            if (shape.contains(event.getX(), event.getY())) {
+                isInsideAnyShape = true;
             }            
         }
-        return isInsideAnyCircle;
+        return isInsideAnyShape;
     }
     
-    private void addNewCircle(MouseEvent event) {
-        circles.add(new Circle(event.getX(), event.getY()));
-    }
-    
-    private void addNewSquare(MouseEvent event) {
-        squares.add(new Square(event.getX(), event.getY()));
+    private void addNewShape(MouseEvent event) {
+        int random = (int)(Math.random() * 2);
+         if (random == 1) {
+             shapes.add(new Circle(event.getX(), event.getY()));
+            }
+         else{
+              shapes.add(new Square(event.getX(), event.getY()));
+              }
     }
     
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        
-        for (Circle circle: circles) {
-            circle.draw(g);
-        }
-        
-        for (Square square: squares) {
-            square.draw(g);
+        for (AbstractShape shape: shapes) {
+            shape.draw(g);
         }
     }
     
-    private class CircleComparator implements Comparator<Circle>
+    private class ShapeComparator implements Comparator<AbstractShape>
     {
         @Override
-        public int compare(Circle first, Circle second) {
-            if (first.getRadius() == second.getRadius()) {
+        public int compare(AbstractShape first, AbstractShape second) {
+            if (first.shapeArea() == second.shapeArea()) {
                 return 0;
             }
-            else if (first.getRadius() > second.getRadius()) {
+            else if (first.shapeArea() > second.shapeArea()) {
                 return -1;
             }
             else {
