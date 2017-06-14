@@ -20,16 +20,10 @@ import java.util.Comparator;
  */
 public class DrawingPanel extends JPanel
 {
-    //private Circle circle;
-    private Collection<Circle> circles;
-    private Collection<Square> squares;
     private Collection<AbstractShape> shapes;
     
     public DrawingPanel() {
         
-        //circle = new Circle(25, Color.yellow);
-        circles = new Vector<Circle>();
-        squares = new Vector<Square>();
         shapes = new Vector<AbstractShape>();
         
         setBackground(Color.GRAY);
@@ -37,8 +31,7 @@ public class DrawingPanel extends JPanel
         addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent event) {
-                addNewShape(event);                
-                //Collections.sort((List<Circle>)circles, new CircleComparator());
+                addNewShape(event);
                 Collections.sort((List<AbstractShape>)shapes, new ShapeComparator());
                 repaint();
             }
