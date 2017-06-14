@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=DrawingPanel
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ DrawingPanel\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=DrawingPanel()
+comment2.params=event
+comment2.target=void\ mouseClicked(java.awt.event.MouseEvent)
+comment3.params=event
+comment3.target=void\ mouseDragged(java.awt.event.MouseEvent)
+comment4.params=event
+comment4.target=boolean\ clickIsInsideAnyCircle(java.awt.event.MouseEvent)
+comment5.params=event
+comment5.target=void\ addNewCircle(java.awt.event.MouseEvent)
+comment6.params=event
+comment6.target=void\ addNewSquare(java.awt.event.MouseEvent)
+comment7.params=g
+comment7.target=void\ paint(java.awt.Graphics)
+numComments=8
