@@ -1,4 +1,5 @@
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  * Abstract class AbstractShape - write a description of the class here
@@ -13,6 +14,7 @@ public abstract class AbstractShape
     protected Color color;
     protected boolean changeAspect;
     
+    
     protected Color getNextColor() {
         int red = (int) (255 * Math.random());
         int green = (int) (255 * Math.random());
@@ -21,16 +23,25 @@ public abstract class AbstractShape
         return new Color(red, green, blue);
     }
     
-    protected void changeAspect(){
-        color = getNextColor();
-        changeAspect = false;
+    //template method
+    public void clickAt(int x, int y) {
+        changeAspect = contains(x, y);
+        if (changeAspect) {
+            color = getNextColor();
+            changeAspect = false;
+            changeAspect();
+        }
     }
     
-    protected abstract void draw(Graphics g, int x, int y);
-    
-    protected abstract void draw(Graphics g);
-    
-    protected abstract void clickAt(int x, int y);
+    public void draw(Graphics g){
+        g.setColor(color);
+        drawShape(g);
+    }
     
     protected abstract boolean contains(int x, int y);
+    
+    protected abstract void changeAspect();
+    
+    protected abstract void drawShape(Graphics g);
+    
 }

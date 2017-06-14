@@ -22,24 +22,14 @@ public class Square extends AbstractShape
         side = 25;
     }
     
-    public void draw(Graphics g, int x, int y) {
-        this.draw(g);
-        this.x = x;
-        this.y = y;
-    }
-    
-    public void draw(Graphics g) {
-        g.setColor(color);
+    public void drawShape(Graphics g) {
         g.fillRect(x - side, y - side, side * 2, side * 2);
     }
     
-    public void clickAt(int x, int y) {
-        changeAspect = contains(x, y);
-        if (changeAspect) {
-            changeAspect();
-            side = (int)(200 * Math.random());
-        }
+    public void changeAspect() {
+        side = (int)(200 * Math.random());
     }
+    
     
     public boolean contains(int x, int y) {
         return this.x <= x && x <= this.x + side && this.y <= y && y <= this.y + side;
