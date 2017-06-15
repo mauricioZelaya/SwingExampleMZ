@@ -31,6 +31,21 @@ public class Circle extends AbstractShape
         
     public void drawShape(Graphics g) {
         g.fillOval(x - radius , y - radius, radius * 2, radius * 2);
+        drawInternalOval(g);
+        drawText(g);
+    }
+    
+    private void drawInternalOval(Graphics g){
+        g.setColor(Color.WHITE);
+        g.fillOval(x - radius+3, y - radius+3, (radius * 2) - 5, (radius * 2)-5);
+    }
+    
+    public void drawText(Graphics g){
+        String text = "Task";
+        FontMetrics fm = g.getFontMetrics();
+        double textWidth = fm.getStringBounds(text, g).getWidth();
+        g.setColor(Color.BLACK);
+        g.drawString(text, (int) (x - textWidth/2), (int) (y + fm.getMaxAscent() / 2));
     }
     
     @Override
@@ -40,12 +55,12 @@ public class Circle extends AbstractShape
         double d = Math.hypot(yCenter - y, xCenter - x);
         return d <= radius;
     }
-    
+    /*
     public int getRadius() {
         return radius;
-    }
+    }*/
     
     public double shapeArea(){
-        return Math.pow(getRadius(),2)*Math.PI;
+        return Math.pow(this.radius,2)*Math.PI;
     }
 }

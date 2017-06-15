@@ -62,6 +62,7 @@ public class DrawingPanel extends JPanel
         int random = (int)(Math.random() * 2);
          if (random == 1) {
              shapes.add(new Circle(event.getX(), event.getY()));
+             //shapes.add(new Circle(event.getX(), event.getY()));
             }
          else{
               shapes.add(new Square(event.getX(), event.getY()));
