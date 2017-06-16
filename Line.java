@@ -13,18 +13,13 @@ public class Line extends AbstractShape
     private int endY;
     private int size;
     
-    public Line(int size, Color color) {
-        this.size = size;
-        this.color = color;
-    }
-    
-    public Line(int x, int y) {
+    public Line(int x, int y, int endX, int endY) {
         this.x = x;
         this.y = y;
-        color = getNextColor();
-        size = 25;
-        endX = x + size;
-        endY = y + size;
+        this.endX = endX;
+        this.endY = endY;
+        color = Color.BLACK;
+        size = 25;        
     }
     
     public boolean contains(int x, int y){

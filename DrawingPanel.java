@@ -21,10 +21,14 @@ import java.util.Comparator;
 public class DrawingPanel extends JPanel
 {
     private Collection<AbstractShape> shapes;
+    private int previousX;
+    private int previousY;
     
     public DrawingPanel() {
         
         shapes = new Vector<AbstractShape>();
+        previousX = 0;
+        previousY = 0;
         
         setBackground(Color.GRAY);
         
@@ -60,13 +64,17 @@ public class DrawingPanel extends JPanel
     
     private void addNewShape(MouseEvent event) {
         int random = (int)(Math.random() * 2);
-         if (random == 1) {
-             shapes.add(new Circle(event.getX(), event.getY()));
-             //shapes.add(new Circle(event.getX(), event.getY()));
+        if(previousX != 0 && previousY !=0){
+             shapes.add(new Line(previousX, previousY, event.getX(), event.getY()));
             }
-         else{
+        if (random == 1) {
+             shapes.add(new Circle(event.getX(), event.getY()));
+            }
+        else{
               shapes.add(new Square(event.getX(), event.getY()));
-              }
+              }         
+        previousX = event.getX();
+        previousY = event.getY();
     }
     
     @Override

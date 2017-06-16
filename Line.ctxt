@@ -1,16 +1,14 @@
 #BlueJ class context
 comment0.target=Line
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Line\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=size\ color
-comment1.target=Line(int,\ java.awt.Color)
+comment1.params=x\ y\ endX\ endY
+comment1.target=Line(int,\ int,\ int,\ int)
 comment2.params=x\ y
-comment2.target=Line(int,\ int)
-comment3.params=x\ y
-comment3.target=boolean\ contains(int,\ int)
-comment4.params=
-comment4.target=void\ changeAspect()
-comment5.params=g
-comment5.target=void\ drawShape(java.awt.Graphics)
-comment6.params=
-comment6.target=double\ shapeArea()
-numComments=7
+comment2.target=boolean\ contains(int,\ int)
+comment3.params=
+comment3.target=void\ changeAspect()
+comment4.params=g
+comment4.target=void\ drawShape(java.awt.Graphics)
+comment5.params=
+comment5.target=double\ shapeArea()
+numComments=6
